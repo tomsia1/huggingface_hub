@@ -16,8 +16,17 @@
 
 import subprocess
 
+from .logging import get_logger
+
+
+logger = get_logger(__name__)
+
 
 def run_subprocess(command, folder, check=True) -> subprocess.CompletedProcess:
+    if isinstance(command, str):
+        logger.error("`run_subprocess` should be called with a list of strings.")
+        command = command.split()
+
     return subprocess.run(
         command,
         stderr=subprocess.PIPE,

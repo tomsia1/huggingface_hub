@@ -493,7 +493,7 @@ class Repository:
         # For error messages, it's cleaner to show the repo url without the token.
         clean_repo_url = re.sub(r"https://.*@", "https://", repo_url)
         try:
-            run_subprocess("git lfs install", self.local_dir)
+            run_subprocess("git lfs install".split(), self.local_dir)
 
             # checks if repository is initialized in a empty repository or in one with files
             if len(os.listdir(self.local_dir)) == 0:
