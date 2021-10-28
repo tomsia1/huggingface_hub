@@ -921,7 +921,7 @@ class Repository:
         if delete_locally:
             try:
                 run_subprocess(
-                    f"git tag -d {tag_name}".split(), self.local_dir
+                    ["git", "tag", "-d", tag_name], self.local_dir
                 ).stdout.strip()
             except subprocess.CalledProcessError as exc:
                 raise EnvironmentError(exc.stderr)
@@ -946,12 +946,12 @@ class Repository:
         if a message is provided, the tag will be annotated.
         """
         if message:
-            tag_args = f"git tag -a {tag_name} -m {message}"
+            tag_args = ["git", "tag", "-a", tag_name, "-m", message]
         else:
-            tag_args = f"git tag {tag_name}"
+            tag_args = ["git", "tag", tag_name]
 
         try:
-            run_subprocess(tag_args.split(), self.local_dir).stdout.strip()
+            run_subprocess(tag_args, self.local_dir).stdout.strip()
         except subprocess.CalledProcessError as exc:
             raise EnvironmentError(exc.stderr)
 
