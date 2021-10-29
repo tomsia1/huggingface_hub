@@ -657,9 +657,8 @@ class Repository:
             patterns = [patterns]
         try:
             for pattern in patterns:
-                cmd = f"git lfs track {'--filename' if filename else ''}".split() + [
-                    pattern
-                ]
+                cmd = f"git lfs track {'--filename' if filename else ''}".split()
+                cmd.append(pattern)
                 run_subprocess(cmd, self.local_dir)
         except subprocess.CalledProcessError as exc:
             raise EnvironmentError(exc.stderr)
