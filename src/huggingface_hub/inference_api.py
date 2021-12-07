@@ -77,6 +77,7 @@ class InferenceApi:
         task: Optional[str] = None,
         token: Optional[str] = None,
         gpu: Optional[bool] = False,
+        cache: Optional[bool] = True
     ):
         """Inits headers and API call information.
 
@@ -91,7 +92,7 @@ class InferenceApi:
         .. note::
             Setting :obj:`token` is required when you want to use a private model.
         """
-        self.options = {"wait_for_model": True, "use_gpu": gpu}
+        self.options = {"wait_for_model": True, "use_gpu": gpu, "use_cache": cache}
 
         self.headers = {}
         if isinstance(token, str):
